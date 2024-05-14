@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive NavBar</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      nav {
+        display: flex;
+        width: 100%;
+        background-color: red;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        height: 4rem;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+      }
+      li {
+        margin: 0 1rem;
+        cursor: pointer;
+      }
+
+      #hamburger {
+        display: none;
+      }
+
+      /* Utility for showing and hiding mobile menu */
+      .hidden {
+        display: none;
+      }
+
+      @media screen and (max-width: 700px) {
+        /* These are opposite to the ones outside the media query */
+        #menuList {
+          display: none;
+        }
+
+        #hamburger {
+          display: block;
+          font-size: 2rem;
+          cursor: pointer;
+        }
+
+        #mobileMenu {
+            width: 0;
+            background-color: green;
+            overflow: hidden;
+            position: fixed;
+            right: 0;
+            transition: 4s;
+        }
+
+        /* Style the mobile menu when it is not hidden */
+        #mobileMenuList {
+          background-color: aqua;
+          display: flex;
+          flex-direction: column;
+        }
+
+        #mobileMenuList>li{
+            display: block;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: nowrap; /* Prevents text from wrapping when the mobile menu list is too small*/
+            margin: 1rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div>LOGO</div>
+      <ul id="menuList">
+        <li>Home</li>
+        <li>Products</li>
+        <li>Services</li>
+        <li>About</li>
+        <li>Privacy</li>
+      </ul>
+      <!-- Add the hamburger icon as a separate element -->
+      <div id="hamburger">&#8801;</div>
+    </nav>
+    <!-- A separate entity for the menu to display on mobile -->
+    <div id="mobileMenu" class="hide">
+      <ul id="mobileMenuList">
+        <li>Home Mobile</li>
+        <li>Products Mobile</li>
+        <li>Services Mobile</li>
+        <li>About Mobile</li>
+        <li>Privacy Mobile</li>
+      </ul>
+    </div>
+
+    <main>
+      <h1>Main content here</h1>
+      <p>
+        This is the main content. By resizing the browser, the menu in the
+        navigation bar at the top should turn into the familiar hamburger icon.
+      </p>
+    </main>
+
+    <script>
+
+        // Is mobile menu open
+        let mobileMenuIsOpen = false;
+
+      // For fun: a way to make something happen when you click a menu item.
+      const menuItems = document.querySelectorAll("li");
+      console.log(menuItems);
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          console.log(`You clicked on ${item.innerText}`);
+        });
+      });
+
+      // Control what happens when you click on hamburger icon
+      const hamburger = document.getElementById("hamburger");
+      hamburger.addEventListener("click", () => {
+        console.log("Clicked the hamburger");
+        // What happens when you click the hamburger menu?
+        displayMobileMenu();
+      });
+
+      function displayMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hide");
+        if(mobileMenuIsOpen){
+            mobileMenu.style.width = "0";
+        }else {
+            mobileMenu.style.width = "300px";
+        }
+        
+
+        mobileMenuIsOpen = !mobileMenuIsOpen;
+      }
+    </script>
+  </body>
+</html>
