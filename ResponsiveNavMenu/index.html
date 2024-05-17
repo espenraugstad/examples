@@ -34,8 +34,8 @@
         display: none;
       }
 
-      /* Utility for showing and hiding mobile menu */
-      .hidden {
+      /* Hide mobile menu for larger screens */
+      #mobileMenuList{
         display: none;
       }
 
@@ -51,27 +51,28 @@
           cursor: pointer;
         }
 
-        #mobileMenu {
-            width: 0;
-            background-color: green;
-            overflow: hidden;
-            position: fixed;
-            right: 0;
-            transition: 4s;
-        }
-
         /* Style the mobile menu when it is not hidden */
         #mobileMenuList {
           background-color: aqua;
           display: flex;
           flex-direction: column;
+          position: fixed;
+          right: 0;
+          padding: 0 1rem;
+          margin: 0;
+          transition: right 2s;
         }
 
-        #mobileMenuList>li{
-            display: block;
-            font-family: 'Courier New', Courier, monospace;
-            white-space: nowrap; /* Prevents text from wrapping when the mobile menu list is too small*/
-            margin: 1rem 0;
+        #mobileMenuList.hidden{
+          right: -100%;
+          transition: 2s;
+        }
+
+        #mobileMenuList > li {
+          display: block;
+          font-family: "Courier New", Courier, monospace;
+          white-space: nowrap; /* Prevents text from wrapping when the mobile menu list is too small*/
+          margin: 1rem 0;
         }
       }
     </style>
@@ -89,16 +90,14 @@
       <!-- Add the hamburger icon as a separate element -->
       <div id="hamburger">&#8801;</div>
     </nav>
-    <!-- A separate entity for the menu to display on mobile -->
-    <div id="mobileMenu" class="hide">
-      <ul id="mobileMenuList">
+    <!-- A separate entity for the menu to display on mobile, hidden by default. -->
+      <ul id="mobileMenuList" class="hidden">
         <li>Home Mobile</li>
         <li>Products Mobile</li>
         <li>Services Mobile</li>
         <li>About Mobile</li>
         <li>Privacy Mobile</li>
       </ul>
-    </div>
 
     <main>
       <h1>Main content here</h1>
@@ -109,10 +108,6 @@
     </main>
 
     <script>
-
-        // Is mobile menu open
-        let mobileMenuIsOpen = false;
-
       // For fun: a way to make something happen when you click a menu item.
       const menuItems = document.querySelectorAll("li");
       console.log(menuItems);
@@ -125,22 +120,14 @@
       // Control what happens when you click on hamburger icon
       const hamburger = document.getElementById("hamburger");
       hamburger.addEventListener("click", () => {
-        console.log("Clicked the hamburger");
         // What happens when you click the hamburger menu?
         displayMobileMenu();
       });
 
       function displayMobileMenu() {
-        const mobileMenu = document.getElementById("mobileMenu");
-        mobileMenu.classList.toggle("hide");
-        if(mobileMenuIsOpen){
-            mobileMenu.style.width = "0";
-        }else {
-            mobileMenu.style.width = "300px";
-        }
-        
-
-        mobileMenuIsOpen = !mobileMenuIsOpen;
+        const mobileMenuList = document.getElementById("mobileMenuList");
+        // Toggle the hidden class
+        mobileMenuList.classList.toggle("hidden");
       }
     </script>
   </body>
