@@ -4,7 +4,8 @@ A place to store examples of how to do things.
 
 ## Content
 
-| Folder | Description|
-|--------|------------|
-| ResponsiveNavMenu | A small example on how to go from a regular desktop size top menu bar to a mobile menu bar.
+| Folder | Description| Done |
+|--------|------------|------|
+| ResponsiveNavMenu | A small example on how to go from a regular desktop size top menu bar to a mobile menu bar.| :white_check_mark:
+| ScrollIndicator | An implementation of an indicator to show how far down a page you have scrolled | :x:
 
