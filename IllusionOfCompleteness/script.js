@@ -4,13 +4,14 @@ const scrollable = document.getElementById("scrollable");
 
 // Initialize variable to contain scrolled position and size of content.
 let scrollHeight = 0;
-let pageHeight = 0;
 
 // Take margins into account separately.
 // In this case, it is the top and bottom margins of the main-element
 let margins =
   parseFloat(getComputedStyle(main).marginTop.slice(0,-2)) +
   parseFloat(getComputedStyle(main).marginBottom.slice(0,-2));
+
+let pageHeight = document.body.clientHeight - windowHeight + margins;
 
 // Difference between scroll position and page height
 let diff = 0;
@@ -20,7 +21,7 @@ let minimalDifference = -1; // Double check this value for use.
 window.onscroll = () => {
   // Update scroll related sizes:
   scrollHeight = window.scrollY;
-  pageHeight = document.body.clientHeight - windowHeight + margins;
+  
   diff = scrollHeight - pageHeight;
   
   // Determine whether or not to hide scrollable indicator.
@@ -28,6 +29,7 @@ window.onscroll = () => {
 
   // Update content of scrollable depending on diff
   updateScrollable(diff);
+
 };
 
 // Function that updates the text in the scrollable div.
@@ -37,6 +39,13 @@ function updateScrollable(diff){
     } else {
         scrollable.innerText = "End of page.";
     }
+    // Update color
+    colorScrollable(diff);
+}
+
+function colorScrollable(diff){
+    let hue = Math.round(Math.abs(diff) * 100 / pageHeight);
+    scrollable.style.backgroundColor = `hsla(${100 - hue}, 100%, 50%, 1)`;
 }
 
 // Function to determine whether or not the scrollable div is visible

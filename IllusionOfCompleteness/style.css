@@ -91,7 +91,7 @@ main {
 
 #scrollable:not([class="hidden"]){
     text-align: center;
-    background-color: whitesmoke;
+    background-color: hsla(0,100%, 50%, 1);
     position: fixed;
     bottom: 0rem;
     width: 100%;
